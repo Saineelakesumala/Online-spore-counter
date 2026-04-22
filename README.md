@@ -2,12 +2,12 @@
 Fungal spore counter for spore germination assay  (blind mode)
 library(shiny)
 library(openxlsx)
-
+#  UI DEFINITION
 ui <- fluidPage(
   tags$head(
     tags$meta(name="viewport",
               content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"),
-
+ # ── GLOBAL STYLES 
     tags$style(HTML("
       html, body {
         background-color: #1e293b !important;
@@ -153,9 +153,8 @@ ui <- fluidPage(
         select:   function(){ vibe([5,20,5]); }
       };
 
-      // ════════════════════════════════════════════════
-      //  AUDIO TONES
-      // ════════════════════════════════════════════════
+     #AUDIO TONES
+      
       var soundEnabled=true, audioCtx=null;
       function getCtx(){ if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)(); return audioCtx; }
       function tone(f,t,d,v){
@@ -272,9 +271,9 @@ ui <- fluidPage(
         speak(msg);
       }
 
-      // ════════════════════════════════════════════════
-      //  KEYBOARD SHORTCUTS
-      // ════════════════════════════════════════════════
+      
+    #KEYBOARD SHORTCUTS
+     
       //  1-5       select column
       //  Space/G   germinated  (+)
       //  X / N     not germinated (-)
@@ -296,7 +295,7 @@ ui <- fluidPage(
           return;
         }
 
-        // ── germinated ──
+      #germinated
         if(k===' '||k==='g'||k==='G'){
           e.preventDefault();
           var c=activeCol-1;
@@ -313,7 +312,7 @@ ui <- fluidPage(
           return;
         }
 
-        // ── not germinated ──
+        #not germinated
         if(k==='x'||k==='X'||k==='n'||k==='N'){
           e.preventDefault();
           var c=activeCol-1;
@@ -338,7 +337,7 @@ ui <- fluidPage(
           return;
         }
 
-        // ── read all totals ──
+       #read all totals
         if(k==='t'||k==='T'){
           e.preventDefault();
           var grand=0, parts=[];
@@ -367,9 +366,9 @@ ui <- fluidPage(
         }
       });
 
-      // ════════════════════════════════════════════════
-      //  RECEIVE COUNT SYNC FROM SERVER
-      // ════════════════════════════════════════════════
+     
+      #RECEIVE COUNT SYNC FROM SERVER
+   
       $(document).on('shiny:connected',function(){
         Shiny.addCustomMessageHandler('syncCounts',function(m){
           gCounts=m.g; nCounts=m.n;
@@ -384,9 +383,9 @@ ui <- fluidPage(
         Shiny.addCustomMessageHandler('setUnsaved', function(m){ hasUnsaved=m.unsaved; });
       });
 
-      // ════════════════════════════════════════════════
-      //  BUTTON CLICK BRIDGE (mouse/touch)
-      // ════════════════════════════════════════════════
+     
+      #BUTTON CLICK BRIDGE (mouse/touch)
+     
       var bridged=false;
       function attachBridge(){
         if(bridged)return; bridged=true;
@@ -425,9 +424,8 @@ ui <- fluidPage(
         }
       });
 
-      // ════════════════════════════════════════════════
-      //  CURSOR TOOLTIP + VOICE HOVER (mouse)
-      // ════════════════════════════════════════════════
+      #CURSOR TOOLTIP + VOICE HOVER (mouse)
+   
       (function(){
         var tip=document.createElement('div');
         tip.id='cursor-tip';
@@ -502,7 +500,7 @@ ui <- fluidPage(
                p(class="sub-note","Live germination rate"))
       )),
 
-  # ── keyboard cheatsheet ──
+  # keyboard cheatsheet
   div(class="kbd-panel",
       div(class="panel-title", "⌨️ Blind-Mode Keyboard Shortcuts"),
       div(class="kbd-grid",
@@ -557,7 +555,7 @@ ui <- fluidPage(
       div(style="text-align:center;", uiOutput("save_status")))
 )
 
-# ── SERVER ──────────────────────────────────────────────────────────
+# SERVER
 server <- function(input, output, session){
 
   cv <- reactiveValues(
