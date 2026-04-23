@@ -820,4 +820,4 @@ shinyApp(ui=ui, server=server)
 
 **DEVELOPED WEB APP LAYOUT PICTURE :**
 
-![Summary](IMAGES/BASICS STATSTICS_PR0069_2_UNPAIRED.png)
+![WEBAPP](IMAGE/Screenshot-2026-04-22-213519.png)
