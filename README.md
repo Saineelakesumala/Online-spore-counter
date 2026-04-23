@@ -820,4 +820,4 @@ shinyApp(ui=ui, server=server)
 
 **DEVELOPED WEB APP LAYOUT PICTURE :**
 
-![WEBAPP](IMAGE/Screenshot-2026-04-22-213519.png)
+![WEBAPP](IMAGE/WEBAPP.png)
