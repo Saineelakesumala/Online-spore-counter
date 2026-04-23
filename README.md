@@ -317,6 +317,7 @@ ui <- fluidPage(
 | read total all columns | T  |
 | save row | S |
 | help|  H / ? |
+
   
 ```
       document.addEventListener('keydown',function(e){
