@@ -2,13 +2,13 @@
 Fungal spore counter for spore germination assay (blind mode)
 
 <details>
-<summary> Required libraries </summary>
+<summary> **Required libraries** </summary>
 library(shiny)
   
 library(openxlsx)
 
 <details>
-<summary> Adjusting the Spore counter webpage to mobile friendly </summary>
+<summary> **Adjusting the Spore counter webpage to mobile friendly **</summary>
   
 #  UI DEFINITION
 ui <- fluidPage(
