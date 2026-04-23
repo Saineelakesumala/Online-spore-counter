@@ -817,3 +817,7 @@ server <- function(input, output, session){
 ```
 shinyApp(ui=ui, server=server)
 ```
+
+**DEVELOPED WEB APP LAYOUT PICTURE :**
+
+![Summary](IMAGES/BASICS STATSTICS_PR0069_2_UNPAIRED.png)
