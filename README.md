@@ -5,7 +5,6 @@ Fungal spore counter for spore germination assay (blind mode)
 <summary> Required libraries </summary>
   
 library(shiny)
-  
 library(openxlsx)
 
 <details>
