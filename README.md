@@ -2,23 +2,24 @@
 Fungal spore counter for spore germination assay (blind mode)
 
 <details>
-<summary> **Required libraries** </summary>
+<summary> Required libraries </summary>
+  
 library(shiny)
   
 library(openxlsx)
 
 <details>
-<summary> **Adjusting the Spore counter webpage to mobile friendly **</summary>
+<summary> Adjusting the Spore counter webpage to mobile friendly </summary>
   
-#  UI DEFINITION
+#  Mobile friendly - UI DEFINITION IN R 
 ui <- fluidPage(
   tags$head(
     tags$meta(name="viewport",
               content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"),
 <details>
-<summary> Adding styling langage (Cascading Style Sheets) to webpage </summary>
+<summary> Adding styling langage (Cascading Style Sheets) to webpage code </summary>
   
- # GLOBAL STYLES 
+ # Cascading Style Sheets IN R - GLOBAL STYLES 
     tags$style(HTML("
       html, body {
         background-color: #1e293b !important;
@@ -117,7 +118,11 @@ ui <- fluidPage(
       #download_excel { width:260px; font-size:14px; font-weight:600; padding:12px; background:#3b82f6 !important; color:#fff !important; border:none !important; border-radius:12px !important; -webkit-tap-highlight-color:transparent; }
       .shiny-input-container { margin-bottom:4px !important; }
 
-      /* keyboard shortcuts */
+  <details>
+<summary> Spore counter keyboard shortcuts (Cascading Style Sheets) to webpage </summary>
+  
+ # Cascading Style Sheets IN R - KEYBOARD SHORTCUTS 
+ 
       .kbd-panel {
         background:rgba(250,204,21,0.08);
         border:1px solid rgba(250,204,21,0.3);
@@ -132,7 +137,11 @@ ui <- fluidPage(
         color:#facc15; font-family:monospace; white-space:nowrap;
       }
 
-      /* cursor tooltip */
+     <details>
+<summary> Spore counter cursor-tip (Cascading Style Sheets) to webpage </summary>
+  
+ # Cascading Style Sheets IN R  - cursor-tip
+ 
       #cursor-tip {
         position:fixed; pointer-events:none; z-index:9999;
         padding:5px 10px; border-radius:8px; font-size:13px; font-weight:700;
@@ -148,11 +157,13 @@ ui <- fluidPage(
       #cursor-tip.tip-rst-all { background:#dc2626; color:#fff; }
       #cursor-tip.visible   { opacity:1; }
     ")),
-
+    
+ <details>
+<summary> JAVA script for webpage features </summary>
+  
+ # JAVA SCRIPT IN R - Phone vibration
+ 
     tags$script(HTML("
-      // ════════════════════════════════════════════════
-      //  HAPTIC
-      // ════════════════════════════════════════════════
       function vibe(p){ if(navigator.vibrate){ try{navigator.vibrate(p);}catch(e){} } }
       var haptic={
         inc:      function(){ vibe(12); },
@@ -164,7 +175,7 @@ ui <- fluidPage(
         select:   function(){ vibe([5,20,5]); }
       };
 
-     #AUDIO TONES
+  # JAVA SCRIPT IN R - SPORE COUNTING AUDIO 
       
       var soundEnabled=true, audioCtx=null;
       function getCtx(){ if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)(); return audioCtx; }
@@ -223,9 +234,8 @@ ui <- fluidPage(
       };
       function toggleSound(cb){ soundEnabled=cb.checked; }
 
-      // ════════════════════════════════════════════════
-      //  SPEECH
-      // ════════════════════════════════════════════════
+   # JAVA SCRIPT IN R - SPORE COUNTER AUDIO 
+       
       var synth=window.speechSynthesis||null;
       function speak(txt){
         if(!soundEnabled)return;
@@ -244,9 +254,8 @@ ui <- fluidPage(
         synth.speak(u);
       }
 
-      // ════════════════════════════════════════════════
-      //  BLIND-MODE STATE  (mirrors server reactive values)
-      // ════════════════════════════════════════════════
+ # JAVA SCRIPT IN R - SPORE COUNTER TRACK AUDIO - BLIND-MODE STATE  
+    
       var activeCol = 1;  // 1-5
       var colNames  = ['Control','Zero point zero one','Zero point one','One','Ten'];
       var colShort  = ['Ctrl','0.01','0.1','1','10'];
@@ -283,16 +292,16 @@ ui <- fluidPage(
       }
 
       
-    #KEYBOARD SHORTCUTS
+  # JAVA SCRIPT IN R - KEYBOARD TRACKING AND ITS TRACKING
      
-      //  1-5       select column
-      //  Space/G   germinated  (+)
-      //  X / N     not germinated (-)
-      //  R         read active column status
-      //  T         read total all columns
-      //  S         save row
-      //  H / ?     help
-      // ════════════════════════════════════════════════
+  #1) 1-5       select column *
+  #2) Space/G   germinated  (+)
+  #3) X / N     not germinated (-)
+  #4) R         read active column status
+  #5) T         read total all columns
+  #6) S         save row
+  #7) H / ?     help
+
       document.addEventListener('keydown',function(e){
         var tag=(e.target||{}).tagName;
         if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT') return;
@@ -306,7 +315,7 @@ ui <- fluidPage(
           return;
         }
 
-      #germinated
+  # JAVA SCRIPT IN R - KEYBOARD TRACKING FOR GERMINATED
         if(k===' '||k==='g'||k==='G'){
           e.preventDefault();
           var c=activeCol-1;
@@ -323,7 +332,8 @@ ui <- fluidPage(
           return;
         }
 
-        # not germinated
+   # JAVA SCRIPT IN R - KEYBOARD TRACKING FOR NON -GERMINATED
+   
         if(k==='x'||k==='X'||k==='n'||k==='N'){
           e.preventDefault();
           var c=activeCol-1;
@@ -348,7 +358,7 @@ ui <- fluidPage(
           return;
         }
 
-       #read all totals
+  # JAVA SCRIPT IN R - KEYBOARD TRACKING FOR TOTAL GERMINATED SPORES
         if(k==='t'||k==='T'){
           e.preventDefault();
           var grand=0, parts=[];
@@ -360,6 +370,7 @@ ui <- fluidPage(
           return;
         }
 
+  # JAVA SCRIPT IN R - SAVE THE ROW
         // ── save ──
         if(k==='s'||k==='S'){
           e.preventDefault();
@@ -369,7 +380,8 @@ ui <- fluidPage(
           return;
         }
 
-        // ── help ──
+   # JAVA SCRIPT IN R - HELP TO UNDERSTAND THE WEBPAGE FEATURES
+   
         if(k==='h'||k==='H'||k==='?'){
           e.preventDefault();
           speak('Keyboard shortcuts: Press 1 to 5 to select a column. Space or G to count germinated. X or N to count not germinated. R to hear current column. T to hear all totals. S to save the row.');
@@ -378,7 +390,7 @@ ui <- fluidPage(
       });
 
      
-      #RECEIVE COUNT SYNC FROM SERVER
+# JAVA SCRIPT IN R - R RECEIVE COUNT SYNC FROM SERVER
    
       $(document).on('shiny:connected',function(){
         Shiny.addCustomMessageHandler('syncCounts',function(m){
@@ -394,8 +406,7 @@ ui <- fluidPage(
         Shiny.addCustomMessageHandler('setUnsaved', function(m){ hasUnsaved=m.unsaved; });
       });
 
-     
-      #BUTTON CLICK BRIDGE (mouse/touch)
+  # JAVA SCRIPT IN R - BUTTON CLICK BRIDGE BETWEEN R AND JAVA (mouse/touch)
      
       var bridged=false;
       function attachBridge(){
@@ -418,7 +429,9 @@ ui <- fluidPage(
           else if(id==='manual_save'){ haptic.save(); snd.save(); }
           if(ALL.indexOf(id)>-1) Shiny.setInputValue(id,Math.random(),{priority:'event'});
         },true);
-        // Announce on page load
+        
+   # JAVA SCRIPT IN R - Announce on page load
+   
         setTimeout(function(){
           speak('Spore counter ready. Column 1, Control, active. Press H for help.');
           highlightActiveCol();
@@ -435,7 +448,7 @@ ui <- fluidPage(
         }
       });
 
-      #CURSOR TOOLTIP + VOICE HOVER (mouse)
+# JAVA SCRIPT IN R - CURSOR TOOLTIP + VOICE HOVER (mouse)
    
       (function(){
         var tip=document.createElement('div');
@@ -511,7 +524,8 @@ ui <- fluidPage(
                p(class="sub-note","Live germination rate"))
       )),
 
-  # keyboard cheatsheet
+ # JAVA SCRIPT IN R - KEYBOARD CHEETSHEET ON THE WEBPAGE
+ 
   div(class="kbd-panel",
       div(class="panel-title", "⌨️ Blind-Mode Keyboard Shortcuts"),
       div(class="kbd-grid",
@@ -566,7 +580,7 @@ ui <- fluidPage(
       div(style="text-align:center;", uiOutput("save_status")))
 )
 
-# SERVER
+# JAVA SCRIPT IN R - SERVER
 server <- function(input, output, session){
 
   cv <- reactiveValues(
@@ -581,7 +595,7 @@ server <- function(input, output, session){
     stringsAsFactors=FALSE
   ))
 
-  # push count mirror to JS after every reactive change
+  # JAVA SCRIPT IN R - push count mirror to JAVA after every reactive change in R
   sync_counts <- function(){
     session$sendCustomMessage("syncCounts", list(
       g=list(cv$g1, cv$g2, cv$g3, cv$g4, cv$g5),
@@ -636,6 +650,7 @@ server <- function(input, output, session){
     cv$last_save <- Sys.time()
   }
 
+   # JAVA SCRIPT IN R - Autosave
   auto_saved <- reactiveVal(FALSE)
   observe({
     all_full <- (cv$g1+cv$n1==50)&&(cv$g2+cv$n2==50)&&(cv$g3+cv$n3==50)&&
@@ -654,12 +669,15 @@ server <- function(input, output, session){
     }
     if(!all_full) auto_saved(FALSE)
   })
-
+  
+ # JAVA SCRIPT IN R - MANUAL SAVE 
   observeEvent(input$manual_save,{
     do_save()
     session$sendCustomMessage("setUnsaved",list(unsaved=FALSE))
     showNotification("✅ Row saved! Click ⬇️ Download to get Excel.", type="message", duration=4)
   })
+  
+# JAVA SCRIPT IN R - Autosave in EXCEL
 
   build_wb <- function(){
     wb <- createWorkbook()
@@ -709,6 +727,8 @@ server <- function(input, output, session){
         div(class="preview-cell",div(class="preview-key","1"),      div(class="preview-val preview-val-g",cv$g4)),
         div(class="preview-cell",div(class="preview-key","10"),     div(class="preview-val preview-val-g",cv$g5)))
   })
+  
+# JAVA SCRIPT IN R -LIVE UPDATES ON THE WEBPAGE
 
   output$save_status <- renderUI({
     grand <- cv$g1+cv$n1+cv$g2+cv$n2+cv$g3+cv$n3+cv$g4+cv$n4+cv$g5+cv$n5
@@ -726,6 +746,8 @@ server <- function(input, output, session){
       div(style="color:#94a3b8;font-size:10px;margin-top:4px;",paste("Rows saved:",rows))
     )
   })
+  
+# LIVE ROWC UPDATES ON DATA STORAGE
 
   output$saved_table <- renderTable({
     df <- saved_data()
@@ -733,5 +755,6 @@ server <- function(input, output, session){
     else df
   }, striped=FALSE, hover=FALSE, bordered=FALSE, spacing="s", align="c")
 }
+# LAUNCHING THE APP 
 
 shinyApp(ui=ui, server=server)
