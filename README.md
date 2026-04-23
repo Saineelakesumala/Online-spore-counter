@@ -11,6 +11,7 @@ library(openxlsx)
 <summary> Adjusting the Spore counter webpage to mobile friendly </summary>
   
 #  Mobile friendly - UI DEFINITION IN R 
+
 ui <- fluidPage(
   tags$head(
     tags$meta(name="viewport",
