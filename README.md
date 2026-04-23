@@ -26,6 +26,7 @@ ui <- fluidPage(
 <summary> Adding styling langage (Cascading Style Sheets) to webpage code </summary>
   
  # Cascading Style Sheets IN R - GLOBAL STYLES 
+ 
  ```
     tags$style(HTML("
       html, body {
