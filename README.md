@@ -821,3 +821,6 @@ shinyApp(ui=ui, server=server)
 **DEVELOPED WEB APP LAYOUT PICTURE :**
 
 ![WEBAPP](IMAGE/WEBAPP.png)
+
+# CITATION (if used this webpage code for spore counting)
+"https://github.com/Saineelakesumala/Online-spore-counter/edit/main/README.md" 
