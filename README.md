@@ -15,7 +15,10 @@ ui <- fluidPage(
   tags$head(
     tags$meta(name="viewport",
               content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"),
- # ── GLOBAL STYLES 
+<details>
+<summary> Adding styling langage (Cascading Style Sheets) to webpage </summary>
+  
+ # GLOBAL STYLES 
     tags$style(HTML("
       html, body {
         background-color: #1e293b !important;
