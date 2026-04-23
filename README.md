@@ -1,7 +1,14 @@
-# Online-spore-counter-
-Fungal spore counter for spore germination assay  (blind mode)
+# Online spore counter
+Fungal spore counter for spore germination assay (blind mode)
+
+<details>
+<summary> Required libraries </summary>
 library(shiny)
 library(openxlsx)
+
+<details>
+<summary> Adjusting the Spore counter webpage to mobile friendly </summary>
+  
 #  UI DEFINITION
 ui <- fluidPage(
   tags$head(
@@ -312,7 +319,7 @@ ui <- fluidPage(
           return;
         }
 
-        #not germinated
+        # not germinated
         if(k==='x'||k==='X'||k==='n'||k==='N'){
           e.preventDefault();
           var c=activeCol-1;
