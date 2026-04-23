@@ -146,9 +146,10 @@ ui <- fluidPage(
         border-radius:5px; padding:1px 7px; font-size:11px; font-weight:700;
         color:#facc15; font-family:monospace; white-space:nowrap;
       }
+
 ```
 
-     <details>
+<details>
 <summary> Spore counter cursor-tip (Cascading Style Sheets) to webpage </summary>
   
  # Cascading Style Sheets IN R  - cursor-tip
