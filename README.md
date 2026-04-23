@@ -3,9 +3,11 @@ Fungal spore counter for spore germination assay (blind mode)
 
 <details>
 <summary> Required libraries </summary>
+  ```
 library(shiny)
   
 library(openxlsx)
+```
 
 <details>
 <summary> Adjusting the Spore counter webpage to mobile friendly </summary>
